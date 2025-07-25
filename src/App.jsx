@@ -19,7 +19,7 @@ export default function App() {
 
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+  }, []);
 
   if (isCheckingAuth && !authUser)
     return (
