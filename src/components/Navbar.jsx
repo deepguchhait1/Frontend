@@ -16,7 +16,8 @@ const Navbar = () => {
   // });
 
   const { logoutMutation } = useLogout();
-
+  // Get the first letter of the user's name and capitalize it
+  const firstLetter = authUser?.fullName ? authUser.fullName.charAt(0).toUpperCase() : "U";
   return (
     <nav className="bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,10 +53,19 @@ const Navbar = () => {
           {/* TODO */}
           <ThemeSelector />
 
-          <div className="avatar">
+          <div className="avatar placeholder">
             <Link to={`/profile/${authUser?._id}`}>
-              <div className="w-9 rounded-full">
-                <img src={authUser?.profilePic} alt="User Avatar" rel="noreferrer" className="rounded-full" />
+              <div className="w-9 rounded-full bg-primary text-primary-content flex items-center justify-center font-bold">
+                {authUser?.profilePic ? (
+                  <img
+                    src={authUser.profilePic}
+                    alt="User Avatar"
+                    rel="noreferrer"
+                    className="rounded-full h-full w-full object-cover"
+                  />
+                ) : (
+                  <span>{firstLetter}</span>
+                )}
               </div>
             </Link>
           </div>
