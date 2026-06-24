@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
-import { BellIcon, LogOutIcon, ShipWheelIcon } from "lucide-react";
+import { BellIcon, UserPen, Settings, LogOutIcon, ShipWheelIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import useLogout from "../hooks/useLogout";
 
@@ -53,9 +53,9 @@ const Navbar = () => {
           {/* TODO */}
           <ThemeSelector />
 
-          <div className="avatar placeholder">
+          {/* <div className="avatar placeholder">
             <Link to={`/profile/${authUser?._id}`}>
-              <div className="w-9 rounded-full bg-primary text-primary-content flex items-center justify-center font-bold">
+              <div className="w-9 h-9 rounded-full bg-primary text-primary-content flex items-center justify-center font-bold ">
                 {authUser?.profilePic ? (
                   <img
                     src={authUser.profilePic}
@@ -68,12 +68,75 @@ const Navbar = () => {
                 )}
               </div>
             </Link>
+          </div> */}
+
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="cursor-pointer">
+              <div className="w-9 h-9 rounded-full overflow-hidden bg-primary text-primary-content flex items-center justify-center">
+                {authUser?.profilePic ? (
+                  <img
+                    src={authUser.profilePic}
+                    alt="User Avatar"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-lg font-bold">
+                    {firstLetter}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[100] mt-3 w-64 rounded-2xl border border-base-300 bg-base-100 p-2 shadow-xl"
+            >
+              {/* User Info */}
+              <li className="px-4 py-3 border-b border-base-300">
+                <p className="font-semibold text-base-content">
+                  {authUser?.fullName}
+                </p>
+                <p className="text-xs opacity-70 truncate">
+                  {authUser?.email}
+                </p>
+              </li>
+
+              {/* Profile */}
+              <li>
+                <Link
+                  to={`/profile/${authUser?._id}`}
+                  className="flex items-center gap-3 rounded-xl px-4 py-3 hover:bg-base-200 transition-colors"
+                >
+                  <UserPen size={18} />
+                  <span>Edit Profile</span>
+                </Link>
+              </li>
+
+              {/* Settings */}
+              <li>
+                <Link
+                  to="/settings"
+                  className="flex items-center gap-3 rounded-xl px-4 py-3 hover:bg-base-200 transition-colors"
+                >
+                  <Settings size={18} />
+                  <span>Settings</span>
+                </Link>
+              </li>
+
+              {/* Logout */}
+              <li className="mt-1 border-t border-base-300 pt-1">
+                <button
+                  onClick={logoutMutation}
+                  className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-error hover:bg-error/10 transition-colors"
+                >
+                  <LogOutIcon size={18} />
+                  <span>Logout</span>
+                </button>
+              </li>
+            </ul>
           </div>
 
-          {/* Logout button */}
-          <button className="btn btn-ghost btn-circle" onClick={logoutMutation}>
-            <LogOutIcon className="h-6 w-6 text-base-content opacity-70" />
-          </button>
+
         </div>
       </div>
     </nav>

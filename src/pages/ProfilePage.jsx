@@ -132,7 +132,7 @@ export default function ProfilePage() {
             {/* Header with Edit Button */}
             <div className="flex items-center justify-between">
               <h1 className="text-2xl sm:text-3xl font-bold">Profile</h1>
-              <button 
+              <button
                 className="btn btn-primary btn-sm gap-2"
                 onClick={() => setIsEditModalOpen(true)}
               >
@@ -143,7 +143,7 @@ export default function ProfilePage() {
 
             {/* Profile Picture */}
             <div className="flex flex-col items-center space-y-4">
-              <div className="avatar">
+              {/* <div className="avatar">
                 <div className="size-32 rounded-full">
                   <img 
                     src={authUser?.profilePic || '/default-avatar.svg'} 
@@ -151,6 +151,19 @@ export default function ProfilePage() {
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
+              </div> */}
+              <div className="size-32 rounded-full overflow-hidden bg-primary text-primary-content flex items-center justify-center font-bold">
+                {authUser?.profilePic ? (
+                  <img
+                    src={authUser.profilePic}
+                    alt={authUser?.fullName}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-5xl">
+                    {authUser?.fullName?.charAt(0).toUpperCase() || "U"}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -222,7 +235,7 @@ export default function ProfilePage() {
         <div className="modal-box max-w-3xl max-h-[90vh] overflow-y-auto">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold">Edit Profile</h2>
-            <button 
+            <button
               className="btn btn-sm btn-circle btn-ghost"
               onClick={() => setIsEditModalOpen(false)}
             >
@@ -234,11 +247,11 @@ export default function ProfilePage() {
             {/* PROFILE PIC CONTAINER */}
             <div className="flex flex-col items-center justify-center space-y-4">
               {/* IMAGE PREVIEW */}
-              <div 
+              <div
                 className="size-32 rounded-full bg-base-300 cursor-pointer hover:opacity-80 transition-opacity relative group"
                 onClick={handleImageClick}
               >
-                {formData.profilePic && formData.profilePic.trim() ? (
+                {/* {formData.profilePic && formData.profilePic.trim() ? (
                   <img
                     src={formData.profilePic}
                     alt="Profile Preview"
@@ -248,15 +261,28 @@ export default function ProfilePage() {
                   <div className="flex items-center justify-center h-full w-full">
                     <Camera className="size-12 text-base-content opacity-40" />
                   </div>
+                )} */}
+                {formData.profilePic && formData.profilePic.trim() ? (
+                  <img
+                    src={formData.profilePic}
+                    alt="Profile Preview"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full w-full bg-primary text-primary-content rounded-full">
+                    <span className="text-5xl font-bold">
+                      {formData.fullName?.charAt(0).toUpperCase() || "U"}
+                    </span>
+                  </div>
                 )}
-                
+
                 {/* Loading overlay */}
                 {isUploading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm rounded-full">
                     <Loader className="size-8 text-white animate-spin" />
                   </div>
                 )}
-                
+
                 {/* Hover overlay */}
                 <div className="absolute inset-0 flex items-center justify-center bg-transparent group-hover:bg-white/10 group-hover:backdrop-blur-sm transition-all rounded-full">
                   <Upload className="size-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -274,10 +300,10 @@ export default function ProfilePage() {
 
               {/* Upload Button */}
               <div className="text-center">
-                <button 
-                  type="button" 
-                  onClick={handleImageClick} 
-                  className="btn btn-accent btn-sm"
+                {/* <button
+                  type="button"
+                  onClick={handleImageClick}
+                  className="btn btn-active border-dashed btn-sm"
                   disabled={isUploading}
                 >
                   {isUploading ? (
@@ -287,8 +313,26 @@ export default function ProfilePage() {
                     </>
                   ) : (
                     <>
-                      <Upload className="size-4 mr-2" />
+                      <Upload className="size-4 mr-2 " />
                       Upload Image
+                    </>
+                  )}
+                </button> */}
+                <button
+                  type="button"
+                  onClick={handleImageClick}
+                  disabled={isUploading}
+                  className="group flex items-center gap-2 rounded-full border border-primary/30 bg-base-100 px-5 py-2 font-medium text-primary shadow-sm transition-all hover:border-primary hover:shadow-md"
+                >
+                  {isUploading ? (
+                    <>
+                      <Loader className="size-4 animate-spin" />
+                      Uploading...
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="size-4 transition-transform group-hover:-translate-y-0.5" />
+                      Change Photo
                     </>
                   )}
                 </button>
@@ -327,6 +371,7 @@ export default function ProfilePage() {
                 className="input input-bordered w-full"
                 placeholder="your@email.com"
                 required
+                disabled
               />
             </div>
 

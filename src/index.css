@@ -109,3 +109,66 @@ div.str-chat.str-chat .str-chat__message-input,
 *::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+
+.custom-chat-theme {
+  --str-chat__background-color: hsl(var(--b1));
+  --str-chat__primary-color: hsl(var(--p));
+  --str-chat__secondary-background-color: hsl(var(--b2));
+  --str-chat__surface-color: hsl(var(--b2));
+  --str-chat__text-color: hsl(var(--bc));
+  --str-chat__border-color: hsl(var(--b3));
+}
+
+/* Message Input */
+.custom-chat-theme .str-chat__message-input {
+  background: hsl(var(--b2));
+  border-top: 1px solid hsl(var(--b3));
+}
+
+.custom-chat-theme .str-chat__message-textarea textarea {
+  background: hsl(var(--b1));
+  color: hsl(var(--bc));
+  border: 1px solid hsl(var(--b3));
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.custom-chat-theme .str-chat__message-textarea textarea:focus {
+  outline: none;
+  border-color: hsl(var(--p));
+  box-shadow: 0 0 0 2px hsl(var(--p) / 0.2);
+}
+
+/* Header */
+.custom-chat-theme .str-chat__channel-header {
+  background: hsl(var(--b1));
+  border-bottom: 1px solid hsl(var(--b3));
+}
+
+/* Messages Area */
+.custom-chat-theme .str-chat__list {
+  background: hsl(var(--b1));
+}
+
+/* My Messages */
+.custom-chat-theme .str-chat__message-simple--me .str-chat__message-bubble {
+  background: hsl(var(--p));
+  color: hsl(var(--pc));
+}
+
+/* Other User Messages */
+.custom-chat-theme .str-chat__message-bubble {
+  background: hsl(var(--b2));
+  color: hsl(var(--bc));
+}
+
+/* Send Button */
+.custom-chat-theme .str-chat__send-button {
+  color: hsl(var(--p));
+}
+
+.custom-chat-theme .str-chat__send-button:hover {
+  opacity: 0.8;
+}
+

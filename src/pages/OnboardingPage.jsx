@@ -3,7 +3,7 @@ import useAuthUser from "../hooks/useAuthUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { completeOnboarding, uploadImage } from "../lib/api";
-import { Loader, MapPin, Camera, Upload } from "lucide-react";
+import { Loader, MapPin, Camera, Upload, UserCheck } from "lucide-react"; // Added UserCheck icon for idle state
 import { LANGUAGES } from "../constants";
 
 const OnboardingPage = () => {
@@ -28,15 +28,13 @@ const OnboardingPage = () => {
       toast.success("Profile onboarded successfully");
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
     },
-
     onError: (error) => {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Something went wrong");
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     onboardingMutation(formState);
   };
 
@@ -44,19 +42,16 @@ const OnboardingPage = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate file type
     if (!file.type.startsWith('image/')) {
       toast.error('Please select an image file');
       return;
     }
 
-    // Validate file size (5MB)
     if (file.size > 5 * 1024 * 1024) {
       toast.error('Image size should be less than 5MB');
       return;
     }
 
-    // Show preview immediately using FileReader
     const reader = new FileReader();
     reader.onloadend = () => {
       setFormState(prev => ({ ...prev, profilePic: reader.result }));
@@ -73,9 +68,9 @@ const OnboardingPage = () => {
       toast.success('Image uploaded successfully!');
     } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to upload image');
-      // Revert to previous state on error
       setFormState(prev => ({ ...prev, profilePic: authUser?.profilePic || '' }));
-    } finally {
+    }
+    finally {
       setIsUploading(false);
     }
   };
@@ -95,13 +90,15 @@ const OnboardingPage = () => {
             <div className="flex flex-col items-center justify-center space-y-4">
               {/* IMAGE PREVIEW */}
               <div
-                className="size-32 rounded-full bg-base-300 cursor-pointer hover:opacity-80 transition-opacity relative group"
+                className="size-32 rounded-full bg-base-300 cursor-pointer hover:opacity-80 transition-opacity relative group overflow-hidden flex items-center justify-center"
                 onClick={handleImageClick}
               >
-                {formState.profilePic && formState.profilePic.trim() ? (
+                {formState.profilePic &&
+                  formState.profilePic.trim() !== "" &&
+                  (formState.profilePic.startsWith("http") || formState.profilePic.startsWith("data:image")) ? (
                   <img
                     src={formState.profilePic}
-                    alt="Profile Preview"
+                    alt="" // Leaving alt blank here prevents text from blowing up your layout if it breaks
                     className="w-full h-full object-cover rounded-full"
                   />
                 ) : (
@@ -112,7 +109,7 @@ const OnboardingPage = () => {
 
                 {/* Loading overlay */}
                 {isUploading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 backdrop-blur-sm rounded-full">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-full">
                     <Loader className="size-8 text-white animate-spin" />
                   </div>
                 )}
@@ -184,7 +181,6 @@ const OnboardingPage = () => {
 
             {/* LANGUAGES */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* NATIVE LANGUAGE */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Native Language</span>
@@ -204,7 +200,6 @@ const OnboardingPage = () => {
                 </select>
               </div>
 
-              {/* LEARNING LANGUAGE */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Learning Language</span>
@@ -243,18 +238,17 @@ const OnboardingPage = () => {
               </div>
             </div>
 
-            {/* SUBMIT BUTTON */}
-
+            {/* FIXED SUBMIT BUTTON */}
             <button className="btn btn-primary w-full" disabled={isPending} type="submit">
-              {!isPending ? (
-                <>
-                  <Loader className="size-5 mr-2" />
-                  Complete Onboarding
-                </>
-              ) : (
+              {isPending ? (
                 <>
                   <Loader className="animate-spin size-5 mr-2" />
                   Onboarding...
+                </>
+              ) : (
+                <>
+                  <UserCheck className="size-5 mr-2" />
+                  Complete Onboarding
                 </>
               )}
             </button>
@@ -264,4 +258,5 @@ const OnboardingPage = () => {
     </div>
   );
 };
+
 export default OnboardingPage;

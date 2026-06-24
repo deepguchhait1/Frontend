@@ -66,14 +66,27 @@ const Sidebar = () => {
 
       {/* USER PROFILE SECTION */}
       <div className="p-4 border-t border-base-300 mt-auto">
-        <Link 
+        <Link
           to={`/profile/${authUser?._id}`}
           className="flex items-center gap-3  rounded-lg p-2 transition-colors cursor-pointer"
         >
-          <div className="avatar">
+          {/* <div className="avatar">
             <div className="w-10 rounded-full">
               <img src={authUser?.profilePic || '/default-avatar.svg'} alt="User Avatar" />
             </div>
+          </div> */}
+          <div className="w-10 h-10 rounded-full overflow-hidden bg-primary text-primary-content flex items-center justify-center font-bold">
+            {authUser?.profilePic ? (
+              <img
+                src={authUser.profilePic}
+                alt="User Avatar"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-lg">
+                {authUser?.fullName?.charAt(0).toUpperCase() || "U"}
+              </span>
+            )}
           </div>
           <div className="flex-1">
             <p className="font-semibold text-sm">{authUser?.fullName}</p>

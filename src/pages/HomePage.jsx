@@ -7,7 +7,7 @@ import {
   sendFriendRequest,
 } from "../lib/api";
 import { Link } from "react-router";
-import { CheckCircleIcon, MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
+import { CheckCircleIcon, MapPinIcon, UserPlusIcon, UsersIcon,ArrowLeftRightIcon } from "lucide-react";
 
 import { capitialize } from "../lib/utils";
 
@@ -109,61 +109,109 @@ const HomePage = () => {
                 return (
                   <div
                     key={user._id}
-                    className="card bg-base-200 hover:shadow-lg transition-all duration-300"
+                    className="bg-base-300 border border-base-300 rounded-2xl overflow-hidden hover:shadow-lg hover:border-primary/20 transition-all duration-300"
                   >
-                    <div className="card-body p-5 space-y-4">
-                      <div className="flex items-center gap-3">
-                        <div className="avatar size-16 rounded-full">
-                          <img 
-                            src={user.profilePic || '/default-avatar.svg'} 
-                            alt={user.fullName}
-                            loading="lazy"
-                            decoding="async"
-                            className="w-full h-full object-cover rounded-full"
-                          />
+                    <div className="p-5">
+                      {/* Profile */}
+                      <div className="flex items-start gap-4">
+                        <div className="relative">
+                          <div className="w-14 h-14 rounded-full overflow-hidden bg-primary/10 text-primary flex items-center justify-center font-semibold text-lg">
+                            {user.profilePic ? (
+                              <img
+                                src={user.profilePic}
+                                alt={user.fullName}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              user.fullName?.charAt(0).toUpperCase()
+                            )}
+                          </div>
+
+                          <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-success border-2 border-base-100"></span>
                         </div>
 
-                        <div>
-                          <h3 className="font-semibold text-lg">{user.fullName}</h3>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-bold text-base truncate">
+                            {user.fullName}
+                          </h3>
+
                           {user.location && (
-                            <div className="flex items-center text-xs opacity-70 mt-1">
-                              <MapPinIcon className="size-3 mr-1" />
-                              {user.location}
+                            <div className="flex items-center gap-1 text-xs opacity-60 mt-1">
+                              <MapPinIcon className="size-3" />
+                              <span className="truncate">{user.location}</span>
                             </div>
                           )}
                         </div>
                       </div>
 
-                      {/* Languages with flags */}
-                      <div className="flex flex-wrap gap-1.5">
-                        <span className="badge badge-secondary">
-                          {getLanguageFlag(user.nativeLanguage)}
-                          Native: {capitialize(user.nativeLanguage)}
-                        </span>
-                        <span className="badge badge-outline">
-                          {getLanguageFlag(user.learningLanguage)}
-                          Learning: {capitialize(user.learningLanguage)}
-                        </span>
+                      {/* Bio */}
+                      <p className="text-sm opacity-70 mt-4 line-clamp-2 min-h-[40px]">
+                        {user.bio || "Looking for language exchange partners."}
+                      </p>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="border-t border-base-300"></div>
+
+                    {/* Languages */}
+                    <div className="px-5 py-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-10 h-10 rounded-full bg-base-200 flex items-center justify-center">
+                            {getLanguageFlag(user.nativeLanguage)}
+                          </div>
+
+                          <div>
+                            <p className="font-medium text-sm capitalize">
+                              {capitialize(user.nativeLanguage)}
+                            </p>
+                            <p className="text-xs opacity-50">
+                              Native
+                            </p>
+                          </div>
+                        </div>
+
+                        <ArrowLeftRightIcon className="size-4 opacity-30" />
+
+                        <div className="flex items-center gap-2">
+                          <div>
+                            <p className="font-medium text-sm capitalize text-right">
+                              {capitialize(user.learningLanguage)}
+                            </p>
+                            <p className="text-xs opacity-50 text-right">
+                              Learning
+                            </p>
+                          </div>
+
+                          <div className="w-10 h-10 rounded-full bg-base-200 flex items-center justify-center">
+                            {getLanguageFlag(user.learningLanguage)}
+                          </div>
+                        </div>
                       </div>
+                    </div>
 
-                      {user.bio && <p className="text-sm opacity-70">{user.bio}</p>}
+                    {/* Divider */}
+                    <div className="border-t border-base-300"></div>
 
-                      {/* Action button */}
+                    {/* Action */}
+                    <div className="p-4">
                       <button
-                        className={`btn w-full mt-2 ${hasRequestBeenSent ? "btn-disabled" : "btn-primary"
-                          } `}
+                        className={`btn w-full rounded-xl ${hasRequestBeenSent
+                            ? "btn-success btn-disabled"
+                            : "btn-outline"
+                          }`}
                         onClick={() => sendRequestMutation(user._id)}
                         disabled={hasRequestBeenSent || isPending}
                       >
                         {hasRequestBeenSent ? (
                           <>
-                            <CheckCircleIcon className="size-4 mr-2" />
+                            <CheckCircleIcon className="size-4" />
                             Request Sent
                           </>
                         ) : (
                           <>
-                            <UserPlusIcon className="size-4 mr-2" />
-                            Send Friend Request
+                            <UserPlusIcon className="size-4" />
+                            Connect
                           </>
                         )}
                       </button>
