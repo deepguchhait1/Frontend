@@ -54,17 +54,17 @@ const NAV_LINKS = ["Features", "How It Works", "About", "Blog"];
 export default function LandingPage() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    
+
     // Mouse Glow Positions state
     const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
     const [isHoveringClickable, setIsHoveringClickable] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 40);
-        
+
         const handleMouseMove = (e) => {
             setMousePos({ x: e.clientX, y: e.clientY });
-            
+
             // Check if the cursor is currently resting on a button, link, or card node
             const target = e.target;
             const isClickable = target.closest('a, button, .card, [role="button"], input, select');
@@ -73,7 +73,7 @@ export default function LandingPage() {
 
         window.addEventListener("scroll", handleScroll);
         window.addEventListener("mousemove", handleMouseMove);
-        
+
         return () => {
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("mousemove", handleMouseMove);
@@ -242,8 +242,8 @@ export default function LandingPage() {
                         { icon: <Shield size={26} />, title: "Safe Space", desc: "Moderated community environments, strict response tool metrics, and structured privacy protections." },
                         { icon: <Zap size={26} />, title: "Instant Sessions", desc: "Zero advanced scheduling required — simply initialize matching paths to unlock real calls instantly." },
                     ].map((f, i) => (
-                        <div 
-                            key={i} 
+                        <div
+                            key={i}
                             className="group relative card bg-base-100 border border-base-300 hover:border-primary/30 p-8 shadow-sm rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2"
                         >
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/5 text-primary flex items-center justify-center mb-6 border border-base-200 group-hover:scale-110 group-hover:from-primary/20 group-hover:to-secondary/15 transition-all duration-300">
@@ -308,7 +308,11 @@ export default function LandingPage() {
                                 className="group relative card bg-base-200/50 backdrop-blur-sm border border-base-300 hover:border-primary/30 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1.5 flex flex-col items-center text-center z-10"
                             >
                                 <div className="w-14 h-14 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-primary-content text-sm font-black shadow-md shadow-primary/20 mb-6 relative group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/30 transition-all duration-300">
-                                    {s.step}
+                                    <div className="bg-base-100/90 w-12 h-12 rounded-full flex items-center justify-center">
+                                        <span className="text-xl font-bold bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
+                                            {s.step}
+                                        </span>
+                                    </div>
                                     {i < 4 && (
                                         <div className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-base-100 border border-base-300 items-center justify-center text-base-content/40 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-4 transition-all duration-300 shadow-sm z-20">
                                             <ArrowRight className="size-3 text-primary animate-pulse" />
@@ -365,10 +369,10 @@ export default function LandingPage() {
                         ].map((s, i) => (
                             <div
                                 key={i}
-                                className={`card border rounded-2xl p-8 text-center shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 ${s.highlight 
-                                    ? "bg-gradient-to-br from-primary/10 to-secondary/5 border-primary/20 hover:border-primary/40 shadow-primary/5" 
+                                className={`card border rounded-2xl p-8 text-center shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 ${s.highlight
+                                    ? "bg-gradient-to-br from-primary/10 to-secondary/5 border-primary/20 hover:border-primary/40 shadow-primary/5"
                                     : "bg-base-100 border-base-300 hover:border-secondary/40 shadow-base-content/5"
-                                }`}
+                                    }`}
                             >
                                 <div className="text-3xl sm:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-tight" style={{ fontFamily: "'Syne', sans-serif" }}>{s.n}</div>
                                 <div className="text-xs sm:text-sm text-base-content/50 mt-2 font-bold">{s.label}</div>
@@ -506,7 +510,7 @@ export default function LandingPage() {
                         <div className="flex gap-6">
                             {["Twitter", "LinkedIn", "Discord", "GitHub"].map(s => (
                                 <a key={s} href="#" className="text-xs font-bold text-base-content/40 hover:text-primary transition-colors">{s}</a>
-							))}
+                            ))}
                         </div>
                     </div>
                 </div>
