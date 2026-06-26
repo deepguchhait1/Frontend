@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
     MessageCircle, Users, Video, Globe, Shield, Zap, ShipWheelIcon,
     ArrowRight, Play, CheckCircle, Menu, X, Clock, Quote

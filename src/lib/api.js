@@ -16,7 +16,12 @@ export const logout = async () => {
 
 export const getAuthUser = async () => {
   try {
-    const res = await axiosInstance.get("/auth/me");
+    const res = await axiosInstance.get("/auth/me", {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    });
+
     return res.data;
   } catch (error) {
     console.log(error);
@@ -35,31 +40,35 @@ export const getUserFriends = async () => {
 };
 
 export const getRecommendedUsers = async () => {
-  const response = await axiosInstance.get("/users" );
+  const response = await axiosInstance.get("/users");
   return response.data;
 };
 
 export const getOutgoingFriendReqs = async () => {
-  const response = await axiosInstance.get("/users/outgoing-friend-requests" );
+  const response = await axiosInstance.get("/users/outgoing-friend-requests");
   return response.data;
 };
 
 export const sendFriendRequest = async (userId) => {
-  const response = await axiosInstance.post(`/users/friend-request/${userId}` );
+  const response = await axiosInstance.post(`/users/friend-request/${userId}`);
   return response.data;
 };
 
 export const getFriendRequests = async () => {
-  const response = await axiosInstance.get(`/users/friend-requests` );
+  const response = await axiosInstance.get(`/users/friend-requests`);
   return response.data;
 };
 
 export const acceptFriendRequest = async (userId) => {
-  const response = await axiosInstance.put(`/users/friend-request/${userId}/accept` );
+  const response = await axiosInstance.put(
+    `/users/friend-request/${userId}/accept`,
+  );
   return response.data;
 };
 export const rejectFriendRequest = async (userId) => {
-  const response = await axiosInstance.put(`/users/friend-request/${userId}/rejected` );
+  const response = await axiosInstance.put(
+    `/users/friend-request/${userId}/rejected`,
+  );
   return response.data;
 };
 export const getStreamToken = async () => {
@@ -68,25 +77,25 @@ export const getStreamToken = async () => {
 };
 
 export const updateProfile = async (profileData) => {
-  const response = await axiosInstance.put('/users/profile', profileData);
+  const response = await axiosInstance.put("/users/profile", profileData);
   return response.data;
 };
 
 export const uploadImage = async (formData) => {
-  const response = await axiosInstance.post('/upload', formData, {
+  const response = await axiosInstance.post("/upload", formData, {
     headers: {
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
     },
   });
   return response.data;
 };
 
 export const getCallHistory = async () => {
-  const response = await axiosInstance.get('/call/history');
+  const response = await axiosInstance.get("/call/history");
   return response.data;
 };
 
 export const createCallHistory = async (callData) => {
-  const response = await axiosInstance.post('/call/history', callData);
+  const response = await axiosInstance.post("/call/history", callData);
   return response.data;
 };
