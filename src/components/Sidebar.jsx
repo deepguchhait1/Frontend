@@ -11,12 +11,14 @@ const Sidebar = () => {
   return (
     <aside className="w-64 bg-base-200 border-r border-base-300 hidden lg:flex flex-col h-screen sticky top-0">
       <div className="p-5 border-b border-base-300">
-        <Link to="/dashboard" className="flex items-center gap-2.5">
-          <ShipWheelIcon className="size-9 text-primary" />
-          <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary  tracking-wider">
+        <Link to="/dashboard" className="flex items-center gap-2.5 group">
+          <ShipWheelIcon className="size-9 text-primary transition-transform duration-500 group-hover:rotate-45" />
+
+          <span className="text-3xl font-bold font-mono tracking-wider bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent transition-all duration-300">
             BatChit
           </span>
         </Link>
+
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
