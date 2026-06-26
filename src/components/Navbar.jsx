@@ -113,7 +113,7 @@ const Navbar = () => {
               </li>
 
               {/* Settings */}
-              <li>
+              {/* <li>
                 <Link
                   to="/settings"
                   className="flex items-center gap-3 rounded-xl px-4 py-3 hover:bg-base-200 transition-colors"
@@ -121,7 +121,7 @@ const Navbar = () => {
                   <Settings size={18} />
                   <span>Settings</span>
                 </Link>
-              </li>
+              </li> */}
 
               {/* Logout */}
               <li className="mt-1 border-t border-base-300 pt-1">
