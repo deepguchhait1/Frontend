@@ -46,14 +46,14 @@ const Sidebar = () => {
           <BellIcon className="size-5 text-base-content opacity-70" />
           <span>Notifications</span>
         </Link>
-        <Link
+        {/* <Link
           to="/history"
           className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === "/history" ? "btn-active" : ""
             }`}
         >
           <HistoryIcon className="size-5 text-base-content opacity-70" />
           <span>History</span>
-        </Link>
+        </Link> */}
         <Link
           to={`/profile/${authUser?._id}`}
           className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === `/profile/${authUser?._id}` ? "btn-active" : ""

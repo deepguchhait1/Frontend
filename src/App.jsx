@@ -72,7 +72,7 @@ export default function App() {
             ) : (<Navigate to={!isAuthenticated ? "/" : "/onboarding"} />)
           }
         />
-        <Route
+        {/* <Route
           path="/history"
           element={
             isAuthenticated && isOnboarded ? (
@@ -81,7 +81,7 @@ export default function App() {
               </Layout>
             ) : (<Navigate to={!isAuthenticated ? "/" : "/onboarding"} />)
           }
-        />
+        /> */}
         <Route
           path="/profile/:username"
           element={
