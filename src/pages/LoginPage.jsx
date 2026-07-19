@@ -152,7 +152,7 @@ const LoginPage = () => {
             {/* Meta Utility Links */}
             <div className="flex items-center justify-between text-xs sm:text-sm font-medium px-1">
               <label className="flex items-center gap-2 cursor-pointer select-none text-base-content/70">
-                <input type="checkbox" className="checkbox checkbox-primary checkbox-xs sm:checkbox-sm rounded-md" />
+                <input type="checkbox" required className="checkbox checkbox-primary checkbox-xs sm:checkbox-sm rounded-md" />
                 <span>Remember this terminal</span>
               </label>
               <a href="#" className="text-primary hover:underline font-bold transition-all">Forgot Password?</a>

@@ -24,17 +24,17 @@ const Navbar = () => {
         <div className="flex items-center justify-end w-full">
           {/* LOGO - ONLY IN THE CHAT PAGE */}
           {isChatPage && (
-            <div className="p-5 border-b border-base-300">
-              <Link to="/dashboard" className="flex items-center gap-2.5 group">
-                <ShipWheelIcon className="size-9 text-primary transition-transform duration-500 group-hover:rotate-45" />
+            <div className="hidden lg:block">
+              <div className="p-5 ">
+                <Link to="/dashboard" className="flex items-center gap-2.5 group">
+                  <ShipWheelIcon className="size-9 text-primary transition-transform duration-500 group-hover:rotate-45" />
 
-                <span className="text-3xl font-bold font-mono tracking-wider bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent transition-all duration-300">
-                  BatChit
-                </span>
-              </Link>
-
+                  <span className="text-3xl font-bold font-mono tracking-wider bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent transition-all duration-300">
+                    BatChit
+                  </span>
+                </Link>
+              </div>
             </div>
-
           )}
           <div className="pl-5 lg:hidden">
             <Link to="/dashboard" className="flex items-center gap-2.5 group">
