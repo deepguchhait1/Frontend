@@ -26,7 +26,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-base-200 transition-colors duration-300">
+    <div className="min-h-screen flex items-center justify-center  p-4 sm:p-6 lg:p-2 bg-base-200 transition-colors duration-300">
       <div className="flex flex-col lg:flex-row w-full max-w-5xl bg-base-100 rounded-3xl shadow-xl overflow-hidden min-h-[620px] border border-base-300">
         
         {/* LEFT PANEL: APP BRANDING & MOTIVATIONAL SIDEBAR */}
