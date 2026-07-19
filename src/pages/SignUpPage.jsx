@@ -156,7 +156,7 @@ const SignUpPage = () => {
             {/* Legal Agreement */}
             <div className="form-control px-1">
               <label className="label cursor-pointer justify-start gap-3 items-start select-none">
-                <input type="checkbox" className="checkbox checkbox-primary checkbox-xs sm:checkbox-sm rounded-md mt-0.5" required />
+                <input type="checkbox" required className="checkbox checkbox-primary checkbox-xs sm:checkbox-sm rounded-md mt-0.5" required />
                 <span className="text-xs text-base-content/70 leading-normal font-medium">
                   I agree to the <span className="text-primary font-bold hover:underline cursor-pointer">Terms of Service</span> and <span className="text-primary font-bold hover:underline cursor-pointer">Privacy Policy</span>.
                 </span>
